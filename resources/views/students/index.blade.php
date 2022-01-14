@@ -20,12 +20,14 @@
                     <tr>
                         <td class="text-xs">{{$row->name}}</td>
                         <td class="text-xs">{{$row->username}}</td>
-                        <td class="text-xs">{{$row->profile->dob}}</td>
+                        <td class="text-xs">{{date('d/m/Y', strtotime($row->profile->dob))}}</td>
                         <td class="text-xs">{{$row->profile->code}}</td>
                         <td class="text-xs">{{$row->profile->class->name}}</td>
                         <td class="align-middle">
-                            <a class="text-secondary font-weight-bold text-xs">Sửa</a> | 
-                            <a class="text-secondary font-weight-bold text-xs">Xóa</a>
+                            <a class="text-secondary font-weight-bold text-xs"
+                                href="{{route('students.edit', ['id' => $row->id])}}">Sửa</a> | 
+                            <a class="text-secondary font-weight-bold text-xs"
+                                href="{{route('students.delete', ['id' => $row->id])}}">Xóa</a>
                         </td>
                     </tr>
                     @empty

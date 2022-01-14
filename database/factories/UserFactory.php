@@ -19,10 +19,11 @@ class UserFactory extends Factory
     {
         $roles = ['student', 'teacher'];
         $role = $roles[array_rand($roles)];
+        $code = $this->faker->unique()->regexify('[A-Z]{2}[0-9]{8}');
         if($role == 'student') {
             $profile_id = StudentProfile::create([
                 'dob' => now(),
-                'code' => $this->faker->unique()->regexify('[A-Z0-9]{8}'),
+                'code' => $code,
                 'class_id' => Classroom::all()->random()->id,
             ])->id;
         } else if ($role == 'teacher') {
@@ -30,7 +31,7 @@ class UserFactory extends Factory
         }
         return [
             'name' => $this->faker->name(),
-            'username' => $this->faker->userName(),
+            'username' => $role == 'student' ? $code : $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),

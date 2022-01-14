@@ -16,7 +16,13 @@ class Subject extends Model
      */
     protected $fillable = [
         'name',
+        'code',
+        'semester',
     ];
+
+    public function teacherSubjectList() {
+        return $this->hasMany(TeacherSubject::class, 'subject_id');
+    }
 
     public $table = "subjects";
 }

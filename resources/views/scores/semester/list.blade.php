@@ -14,10 +14,10 @@
                 <tbody>
                     @forelse($rows as $row)
                     <tr>
-                        <td class="text-xs">{{$row->semester}}</td>
+                        <td class="text-xs">{{$row['semester']}}</td>
                         <td class="align-middle">
                             <a class="text-secondary font-weight-bold text-xs"
-                                href="{{route('scores.semester', ['id' => $row->semester])}}">Xem điểm</a>
+                                href="{{route('scores.semester', ['id' => $row['semester']])}}">Xem điểm</a>
                         </td>
                     </tr>
                     @empty

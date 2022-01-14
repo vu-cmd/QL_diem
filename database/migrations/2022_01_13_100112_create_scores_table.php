@@ -16,13 +16,14 @@ class CreateScoresTable extends Migration
         Schema::create('scores', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('student_profiles');
+            $table->foreign('student_id')->references('id')->on('student_profiles')->onDelete('cascade');
             $table->unsignedBigInteger('subject_id');
-            $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->unsignedFloat('tp1');
-            $table->unsignedFloat('tp2');
-            $table->unsignedFloat('ck');
-            $table->unsignedFloat('tk');
+            $table->unsignedFloat('tp2')->nullable();
+            $table->unsignedFloat('qt')->nullable();
+            $table->unsignedFloat('ck')->nullable();
+            $table->unsignedFloat('tk')->nullable();
             $table->timestamps();
         });
     }

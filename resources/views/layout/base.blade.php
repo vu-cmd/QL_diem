@@ -32,7 +32,7 @@
             </a>
         </div>
         <ul class="navbar-nav mb-3">
-            @if(!Auth::check())
+            @if(!auth()->check())
             <li class="nav-item">
                 <a class="nav-link text-white bg-gradient-primary" href="{{route('login')}}">
                     <span class="nav-link-text ms-1">
@@ -50,9 +50,11 @@
             </li>
             @endif
         </ul>
+        @if(auth()->check())
         <hr class="horizontal light mt-0 mb-2">
         <div class="w-auto overflow-auto" style="max-height: 60%!important">
             <ul class="navbar-nav">
+                @if(in_array(auth()->user()->role, ['teacher']))
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Sinh viên</h6>
                 </li>
@@ -64,7 +66,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{route('students')}}">
+                    <a class="nav-link text-white" href="{{route('students.add')}}">
                         <span class="nav-link-text ms-1">
                             Thêm sinh viên
                         </span>
@@ -81,12 +83,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{route('teachers')}}">
+                    <a class="nav-link text-white" href="{{route('teachers.add')}}">
                         <span class="nav-link-text ms-1">
                             Thêm giáo viên
                         </span>
                     </a>
                 </li>
+                @endif
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Môn học</h6>
                 </li>
@@ -97,15 +100,32 @@
                         </span>
                     </a>
                 </li>
+                @if(in_array(auth()->user()->role, ['teacher']))
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{route('subjects')}}">
+                    <a class="nav-link text-white" href="{{route('subjects.add')}}">
                         <span class="nav-link-text ms-1">
                             Thêm môn học
                         </span>
                     </a>
                 </li>
+                @endif
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Bảng điểm</h6>
+                </li>
+                @if(in_array(auth()->user()->role, ['teacher']))
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{route('scores.request_edit')}}">
+                        <span class="nav-link-text ms-1">
+                            Danh sách yêu cầu sửa điểm
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{route('scores.add')}}">
+                        <span class="nav-link-text ms-1">
+                            Thêm điểm
+                        </span>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{route('scores.subjects')}}">
@@ -124,10 +144,20 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{route('scores.students')}}">
                         <span class="nav-link-text ms-1">
-                            Bảng điểm theo học sinh
+                            Bảng điểm theo sinh viên
                         </span>
                     </a>
                 </li>
+                @endif
+                @if(in_array(auth()->user()->role, ['student']))
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{route('scores.student', ['id' => auth()->user()->id])}}">
+                        <span class="nav-link-text ms-1">
+                            Bảng điểm cá nhân
+                        </span>
+                    </a>
+                </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{route('scores.semesters')}}">
                         <span class="nav-link-text ms-1">
@@ -138,6 +168,16 @@
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Lớp</h6>
                 </li>
+                @if(in_array(auth()->user()->role, ['student']))
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{route('classes.view', ['id' => auth()->user()->profile->class->id])}}">
+                        <span class="nav-link-text ms-1">
+                            Danh sách lớp
+                        </span>
+                    </a>
+                </li>
+                @endif
+                @if(in_array(auth()->user()->role, ['teacher']))
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{route('classes')}}">
                         <span class="nav-link-text ms-1">
@@ -146,14 +186,16 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{route('classes')}}">
+                    <a class="nav-link text-white" href="{{route('classes.add')}}">
                         <span class="nav-link-text ms-1">
                             Thêm lớp
                         </span>
                     </a>
                 </li>
+                @endif
             </ul>
         </div>
+        @endif
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
@@ -168,6 +210,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 pb-3">
+                    @if (session()->has('error') || session()->has('errors'))
+                    @include('components.error-alert', ['message' => session()->get('error') ?? session()->get('errors')->first()])
+                    @endif
+                    @if (session()->has('success'))
+                    @include('components.success-alert', ['message' => session()->get('success')])
+                    @endif
                     @yield('slot')
                 </div>
             </div>
@@ -176,17 +224,6 @@
     <!--   Core JS Files   -->
     <script src="{{asset('/public/assets/js/core/popper.min.js')}}"></script>
     <script src="{{asset('/public/assets/js/core/bootstrap.min.js')}}"></script>
-    <script src="{{asset('/public/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
-    <script src="{{asset('/public/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-            var options = {
-                damping: '0.5'
-            }
-            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-    </script>
     <script src="{{asset('/public/assets/js/material-dashboard.min.js?v=3.0.0')}}"></script>
 </body>
 

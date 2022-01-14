@@ -8,7 +8,7 @@
                 <thead>
                     <tr>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tên lớp</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số học sinh</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Số sinh viên</th>
                         <th class="text-secondary opacity-7"></th>
                     </tr>
                 </thead>
@@ -18,8 +18,12 @@
                         <td class="text-xs">{{$row->name}}</td>
                         <td class="text-xs">{{$row->students->count()}}</td>
                         <td class="align-middle">
-                            <a class="text-secondary font-weight-bold text-xs">Sửa</a> |
-                            <a class="text-secondary font-weight-bold text-xs">Xóa</a>
+                            <a class="text-secondary font-weight-bold text-xs"
+                                href="{{route('classes.view', ['id' => $row->id])}}">Danh sách</a> | 
+                            <a class="text-secondary font-weight-bold text-xs"
+                                href="{{route('classes.edit', ['id' => $row->id])}}">Sửa</a> | 
+                            <a class="text-secondary font-weight-bold text-xs"
+                                href="{{route('classes.delete', ['id' => $row->id])}}">Xóa</a>
                         </td>
                     </tr>
                     @empty

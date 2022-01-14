@@ -25,10 +25,9 @@ class LoginController extends Controller
             return redirect()->route('index');
         }
 
-        return back()->withErrors([
-            'username' => 'Tài khoản không tồn tại',
-            'password' => 'Mật khẩu không đúng',
-        ]);
+        $error = 'Tài khoản không tồn tại hoặc mật khẩu không đúng';
+
+        return back()->withError($error)->withInput();
     }
 
     /**

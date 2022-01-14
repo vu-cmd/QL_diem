@@ -10,15 +10,14 @@
         </div>
         <div class="card-body">
             <form class="text-start" method="POST" action="{{route('login.post')}}">
-                <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Tên tài khoản</label>
+                <label class="form-label mt-3">Tên tài khoản</label>
+                <div class="input-group input-group-outline">
                     <input type="text" name="username" class="form-control" required>
                 </div>
-                <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Mật khẩu</label>
+                <label class="form-label mt-3">Mật khẩu</label>
+                <div class="input-group input-group-outline">
                     <input type="password" name="password" class="form-control" required>
                 </div>
-                {!! session()->get('error') !!}
                 <div class="text-center">
                     <input type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2" value="Đăng nhập">
                 </div>

@@ -13,6 +13,7 @@
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Mã môn</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Điểm thành phần 1</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Điểm thành phần 2</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Điểm quá trình</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Điểm cuối kì</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tổng kết</th>
                         <th class="text-secondary opacity-7"></th>
@@ -27,11 +28,14 @@
                         <td class="text-xs">{{$row->subject->code}}</td>
                         <td class="text-xs">{{$row->tp1}}</td>
                         <td class="text-xs">{{$row->tp2}}</td>
+                        <td class="text-xs">{{$row->qt}}</td>
                         <td class="text-xs">{{$row->ck}}</td>
                         <td class="text-xs">{{$row->tk}}</td>
                         <td class="align-middle">
-                            <a class="text-secondary font-weight-bold text-xs">Sửa</a> |
-                            <a class="text-secondary font-weight-bold text-xs">Xóa</a>
+                            <a class="text-secondary font-weight-bold text-xs"
+                                href="{{route('scores.edit', ['id' => $row->id])}}">Sửa</a> | 
+                            <a class="text-secondary font-weight-bold text-xs"
+                                href="{{route('scores.delete', ['id' => $row->id])}}">Xóa</a>
                         </td>
                     </tr>
                     @empty

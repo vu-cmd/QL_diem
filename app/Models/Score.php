@@ -19,6 +19,7 @@ class Score extends Model
         'subject_id',
         'tp1',
         'tp2',
+        'qt',
         'ck',
         'tk',
     ];

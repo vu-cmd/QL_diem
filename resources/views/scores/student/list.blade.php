@@ -1,5 +1,5 @@
 @extends('layout.base')
-@section('page_title', 'Chọn học sinh để xem điểm')
+@section('page_title', 'Chọn sinh viên để xem điểm')
 @section('slot')
 <div class="card">
     <div class="card-body px-0 pb-2">

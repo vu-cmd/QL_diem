@@ -19,6 +19,7 @@ class ScoreFactory extends Factory
             'subject_id' => \App\Models\Subject::all()->random()->id,
             'tp1' => $this->faker->numberBetween(0, 10),
             'tp2' => $this->faker->numberBetween(0, 10),
+            'qt' => $this->faker->numberBetween(0, 10),
             'ck' => $this->faker->numberBetween(0, 10),
             'tk' => $this->faker->numberBetween(0, 10),
         ];
