@@ -14,14 +14,21 @@ class ScoreFactory extends Factory
      */
     public function definition()
     {
+        $student_id = \App\Models\StudentProfile::all()->random()->id;
+        $subject_id = \App\Models\Subject::all()->random()->id;
+        // $existed = \App\Models\Score::where('student_id', $student_id)
+        //     ->where('subject_id', $subject_id)->count();
+        // if(!empty($existed)) {
+        //     return null;
+        // }
         return [
-            'student_id' => \App\Models\StudentProfile::all()->random()->id,
-            'subject_id' => \App\Models\Subject::all()->random()->id,
-            'tp1' => $this->faker->numberBetween(0, 10),
-            'tp2' => $this->faker->numberBetween(0, 10),
-            'qt' => $this->faker->numberBetween(0, 10),
-            'ck' => $this->faker->numberBetween(0, 10),
-            'tk' => $this->faker->numberBetween(0, 10),
+            'student_id' => $student_id,
+            'subject_id' => $subject_id,
+            'tp1' => $this->faker->numberBetween(0, 1000) / 100,
+            'tp2' => $this->faker->numberBetween(0, 1000) / 100,
+            'qt' => $this->faker->numberBetween(0, 1000) / 100,
+            'ck' => $this->faker->numberBetween(0, 1000) / 100,
+            'tk' => $this->faker->numberBetween(0, 1000) / 100,
         ];
     }
 }

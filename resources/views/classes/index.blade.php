@@ -1,5 +1,5 @@
 @extends('layout.base')
-@section('page_title', 'Sinh viên')
+@section('page_title', 'Danh sách lớp')
 @section('slot')
 <div class="card">
     <div class="card-body px-0 pb-2">
@@ -27,6 +27,7 @@
                         </td>
                     </tr>
                     @empty
+                    <tr><td colspan='3' class="align-middle text-secondary font-weight-bold text-xs">Không có dữ liệu</td></tr>
                     @endforelse
                 </tbody>
             </table>

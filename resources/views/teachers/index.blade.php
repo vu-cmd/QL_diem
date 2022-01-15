@@ -25,6 +25,7 @@
                         </td>
                     </tr>
                     @empty
+                    <tr><td class="align-middle text-secondary font-weight-bold text-xs">Không có dữ liệu</td></tr>
                     @endforelse
                 </tbody>
             </table>
