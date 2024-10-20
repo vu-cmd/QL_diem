@@ -31,3 +31,12 @@
 - `request_edit_score`: Lưu các yêu cầu sửa điểm của sinh viên
     - `score_id`: Trỏ đến ID tương ứng trong bảng `scores`
     - `message`: Tin nhắn yêu cầu sửa điểm
+
+# Tài khoản mặc định
+- Sinh viên:
+    - Tài khoản: `student`
+    - Mật khẩu: `password`
+
+- Giáo viên:
+    - Tài khoản: `teacher`
+    - Mật khẩu: `password`

@@ -22,9 +22,9 @@
                         <td class="align-middle">
                             @if(in_array(auth()->user()->role, ['teacher']))
                             <a class="text-secondary font-weight-bold text-xs"
-                                href="{{route('students.edit', ['id' => $row->id])}}">Sửa</a> | 
+                                href="{{route('students.edit', ['id' => $row->user->id])}}">Sửa</a> | 
                             <a class="text-secondary font-weight-bold text-xs"
-                                href="{{route('students.delete', ['id' => $row->id])}}">Xóa</a>
+                                href="{{route('students.delete', ['id' => $row->user->id])}}">Xóa</a>
                             @endif
                         </td>
                     </tr>

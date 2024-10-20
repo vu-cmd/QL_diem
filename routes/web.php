@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->namespace('App\Http\Controllers')->group(function () {
     Route::get('/', function () {
-        return redirect()->route('students');
+        if(auth()->user()->role == 'teacher')
+            return redirect()->route('students');
+        else return redirect()->route('scores.student', ['id' => auth()->user()->profile->id]);
     })->name('index');
 
     Route::get('/students', 'StudentController@index')->name('students');

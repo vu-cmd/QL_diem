@@ -21,12 +21,12 @@
 
     <label class="form-label mt-3">Giáo viên</label>
     <div class="overflow-auto" style="max-height: 50vh;">
-        @foreach($teachers_profiles as $row)
+        @foreach($teachers as $row)
         @php
         $check = false;
         if(isset($teacher_subject_list))
-            foreach($teacher_subject_list as $index => $roww) {
-                if($roww->teacherProfile->id == $row->id) {
+            foreach($teacher_subject_list as $index => $row) {
+                if($row->teacherProfile->id == $row->profile->id) {
                     $check = true;
                     unset($teacher_subject_list[$index]);
                     break;
@@ -35,8 +35,8 @@
         @endphp
         <div class="form-check">
             <input class="form-check-input" type="checkbox" name="teacher_id[]"
-                value="{{$row->id}}" {{ $check ? 'checked' : '' }}>
-            <label class="custom-control-label" for="customRadio1">{{$row->user->name}}</label>
+                value="{{ $row->profile ? $row->profile->id : '' }}" {{ $check ? 'checked' : '' }}>
+            <label class="custom-control-label" for="customRadio1">{{$row->name}}</label>
         </div>
         @endforeach
     </div>

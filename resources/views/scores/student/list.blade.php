@@ -21,7 +21,7 @@
                         <td class="text-xs">{{$row->profile->class->name}}</td>
                         <td class="align-middle">
                             <a class="text-secondary font-weight-bold text-xs"
-                                href="{{route('scores.student', ['id' => $row->id])}}">Xem điểm</a>
+                                href="{{route('scores.student', ['id' => $row->profile->id])}}">Xem điểm</a>
                         </td>
                     </tr>
                     @empty

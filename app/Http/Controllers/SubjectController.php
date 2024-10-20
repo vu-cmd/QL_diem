@@ -21,7 +21,6 @@ class SubjectController extends Controller
     public function add()
     {
         $data['teachers'] = User::where('role', 'teacher')->get();
-        $data['teachers_profiles'] = TeacherProfile::all();
         return view('subjects.form', $data);
     }
 
@@ -44,7 +43,7 @@ class SubjectController extends Controller
     public function edit($id)
     {
         $data['rec'] = MainModel::findOrFail($id);
-        $data['teachers_profiles'] = TeacherProfile::all();
+        $data['teachers'] = User::where('role', 'teacher')->get();
         $data['teacher_subject_list'] = TeacherSubject::where('subject_id', $id)->get();
         return view('subjects.form')->with($data);
     }

@@ -8,6 +8,7 @@ use App\Models\Subject;
 use App\Models\User;
 use App\Models\RequestEditScore;
 use App\Models\Classroom;
+use App\Models\StudentProfile;
 use Illuminate\Support\Facades\DB;
 
 class ScoreController extends Controller
@@ -18,10 +19,10 @@ class ScoreController extends Controller
         return view('scores.subject.list', $data);
     }
 
-    public function bySubject(Request $request, $id)
+    public function bySubject($id)
     {
         $data['rows'] = MainModel::where('subject_id', $id)->get();
-        $data['rec'] = MainModel::findOrFail($id);
+        $data['rec'] = Subject::findOrFail($id);
         return view('scores.subject.index', $data);
     }
 
@@ -31,10 +32,10 @@ class ScoreController extends Controller
         return view('scores.student.list', $data);
     }
 
-    public function byStudent(Request $request, $id)
+    public function byStudent($id)
     {
         $data['rows'] = MainModel::where('student_id', $id)->get();
-        $data['rec'] = User::findOrFail($id);
+        $data['rec'] = StudentProfile::findOrFail($id);
         return view('scores.student.index', $data);
     }
 
